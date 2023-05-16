@@ -2,3 +2,10 @@
      max-width: 980px;
      margin: 0 auto;
 }
+
+@media (max-width: 999px) {
+     [class*="__container"] {
+          max-width: none;
+          padding: 0 10px;
+     }
+}
