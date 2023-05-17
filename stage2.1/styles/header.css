@@ -26,6 +26,7 @@
 
 .header__logo svg {
      fill: #6cb52d;
+     max-width: 100%;
 }
 
 .st3 {
@@ -133,12 +134,30 @@
 }
 
 @media (max-width: 999px) {
+
+     .header {
+          height: 60px;
+     }
+
+     .header__logo {
+          width: 250px;
+     }
+
      .menu__list {
           gap: 10px;
      }
 }
 
 @media (max-width: 899px) {
+
+     .header {
+          height: 50px;
+     }
+
+     .header__logo {
+          width: 200px;
+     }
+
      .menu__list {
           display: none;
      }
