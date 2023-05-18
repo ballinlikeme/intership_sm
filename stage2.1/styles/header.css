@@ -123,6 +123,9 @@
      transition-property: opacity, visibility, transform;
      transition-duration: .2s;
      transition-timing-function: ease;
+
+     z-index: 2;
+     background-color: #fff;
 }
 
 .menu__element:hover>.sub-menu {
