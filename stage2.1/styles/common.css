@@ -3,6 +3,11 @@
      margin: 0 auto;
 }
 
+.wrapper {
+     min-height: 100%;
+     overflow: hidden;
+}
+
 @media (max-width: 999px) {
      [class*="__container"] {
           max-width: none;
