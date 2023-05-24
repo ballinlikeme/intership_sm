@@ -1,6 +1,9 @@
 import { MENU_ITEMS } from './db.module.js';
 
-export function fetchMenuDb(listElement) {
+export function fetchMenuDb() {
+
+	let result = [];
+
 	MENU_ITEMS.forEach(item => {
 		const parentElement = document.createElement('li');
 		const innerSpan = document.createElement('span');
@@ -27,6 +30,8 @@ export function fetchMenuDb(listElement) {
 		innerSpan.textContent = item.title;
 
 		parentElement.classList.add('menu__element');
-		listElement.appendChild(parentElement);
+		result.push(parentElement);
 	});
+
+	return result;
 }
