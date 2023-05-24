@@ -1,6 +1,9 @@
 import { CONTENT_ITEMS } from './db.module.js';
 
-export function fetchContentDb(listElement) {
+export function fetchContentDb() {
+
+	let elements = [];
+
 	CONTENT_ITEMS.forEach(item => {
 		const parentElement = document.createElement('li');
 		const bodyElement = document.createElement('div');
@@ -31,6 +34,8 @@ export function fetchContentDb(listElement) {
 		parentElement.classList.add('projects__item');
 		parentElement.appendChild(bodyElement);
 
-		listElement.appendChild(parentElement);	
+		elements.push(parentElement);	
 	});
+
+	return elements;
 }
