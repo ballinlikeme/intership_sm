@@ -1,6 +1,14 @@
+import { fetchMenuDb } from './fetchMenuDb.module.js';
+import { fetchContentDb } from './fetchContentDb.module.js';
+
 document.addEventListener('DOMContentLoaded', () => {
-	const menuIcon = document.getElementById('menu-icon');
+
 	const menuBody = document.getElementById('menu-body');
+	const menuIcon = document.getElementById('menu-icon');
+	const contentList = document.getElementById('content-list');
+
+	fetchMenuDb(menuBody);
+	fetchContentDb(contentList);
 
 	const menuElements = [...document.getElementsByClassName('menu__element')];
 
@@ -9,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			element.classList.toggle('active');
 		};
 	});
-
 
 	menuIcon.onclick = () => {
 		menuBody.classList.toggle('active');
