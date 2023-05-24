@@ -1,1 +1,1 @@
-Deploy: https://delightful-crostata-eb7766.netlify.app/stage2.1/
+Deploy: https://serene-cannoli-04a5a8.netlify.app/stage3.2/
