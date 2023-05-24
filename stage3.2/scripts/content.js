@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		contentList.appendChild(item);
 	});
 
-	input.onchange = debounce((event) => {
+	input.onkeyup = debounce((event) => {
 		contentList.innerHTML = '';
 		contentElements.forEach(item => {
 			if (item.textContent.includes(event.target.value))
