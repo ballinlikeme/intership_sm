@@ -97,6 +97,12 @@
 
      border: 1px solid rgb(240, 240, 240);
      border-radius: 5px;
+
+     transition: border-color, .3s ease;
+}
+
+.projects__search input:focus {
+     border-color: #6cb52d;
 }
 
 
