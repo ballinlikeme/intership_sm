@@ -1,6 +1,7 @@
 .empty {
   width: 100%;
-  display: none;
+  /* display: none; */
+  display: block;
 }
 
 .empty.active {
