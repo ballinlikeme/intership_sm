@@ -1,0 +1,20 @@
+.sub-menu__element {
+     cursor: pointer;
+     transition: color .1s ease;
+}
+
+@media (max-width: 899px)
+{
+	.sub-menu__element {
+          color: #98afae;
+
+          padding: 5px 0;
+     }
+}
+
+@media (min-width: 900px)
+{
+	.sub-menu__element:hover {
+		color: var(--accent-clr);
+	}
+}
