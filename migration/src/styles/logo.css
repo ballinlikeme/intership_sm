@@ -1,26 +1,24 @@
 .header__logo {
-     width: 300px;
+  width: 300px;
 }
 
 .header__logo svg {
-     fill: #6cb52d;
-     max-width: 100%;
+  fill: #6cb52d;
+  max-width: 100%;
 }
 
 .st3 {
-     fill: #fff;
+  fill: #fff;
 }
 
-@media (max-width: 999px)
-{
-     .header__logo {
-          width: 250px;
-     }
+@media (max-width: 999px) {
+  .header__logo {
+    width: 250px;
+  }
 }
 
-@media (max-width: 899px)
-{
-     .header__logo {
-          width: 200px;
-     }
+@media (max-width: 899px) {
+  .header__logo {
+    width: 200px;
+  }
 }
