@@ -1,6 +1,6 @@
 import React from "react";
 import { SubMenuElement } from "./SubMenuElement";
-import "../styles/subMenu.css";
+import "../../styles/subMenu.css";
 
 export const SubMenu = ({ list }) => {
   return (

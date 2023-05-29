@@ -1,25 +1,22 @@
 .projects__info {
-     display: flex;
-     flex-direction: column;
-     gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .projects__title {
-     font-size: 1.5rem;
-     font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .projects__text {
-     font-size: 1rem;
-     line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
-
-@media (max-width: 799px)
-{
-	.projects__title {
-		font-size: 1.2rem;
-		line-height: 150%;
-	}
-
+@media (max-width: 799px) {
+  .projects__title {
+    font-size: 1.2rem;
+    line-height: 150%;
+  }
 }

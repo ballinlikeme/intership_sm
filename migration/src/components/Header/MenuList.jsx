@@ -1,7 +1,7 @@
 import React from "react";
 import { MenuElement } from "./MenuElement";
-import { MENU_ITEMS } from "../mockups/menu";
-import "../styles/menuList.css";
+import { MENU_ITEMS } from "../../mockups/menu";
+import "../../styles/menuList.css";
 
 export const MenuList = ({ isActive }) => {
   return (

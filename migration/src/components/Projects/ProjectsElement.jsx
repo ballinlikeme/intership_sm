@@ -1,7 +1,7 @@
 import React from "react";
-import { ProjectsImages } from "./ProjectsImage";
-import { ProjectsInfo } from "./ProjectsInfo";
-import "../styles/projectsElement.css";
+import { ProjectsImages } from "../Projects/ProjectsImage";
+import { ProjectsInfo } from "../Projects/ProjectsInfo";
+import "../../styles/projectsElement.css";
 
 export const ProjectsElement = ({ item }) => {
   return (

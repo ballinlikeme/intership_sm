@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { MenuIcon } from "../ui/MenuIcon";
+import { MenuIcon } from "../../ui/MenuIcon";
 import { MenuList } from "./MenuList";
-import "../styles/menu.css";
+import "../../styles/menu.css";
 
 export const Menu = () => {
   const [isActive, setIsActive] = useState(false);

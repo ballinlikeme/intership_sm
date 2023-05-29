@@ -1,5 +1,5 @@
 .projects__list {
-     display: flex;
-     flex-wrap: wrap;
-     justify-content: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: stretch;
 }

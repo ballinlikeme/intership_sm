@@ -1,7 +1,7 @@
 import React from "react";
 import { ProjectsSearch } from "./ProjectsSearch";
 import { ProjectsList } from "./ProjectsList";
-import "../styles/projects.css";
+import "../../styles/projects.css";
 
 export const Projects = () => {
   return (

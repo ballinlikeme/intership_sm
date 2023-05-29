@@ -1,7 +1,7 @@
 import React from "react";
 import { ProjectsElement } from "./ProjectsElement";
-import { CONTENT_ITEMS } from "../mockups/content";
-import "../styles/projectsList.css";
+import { CONTENT_ITEMS } from "../../mockups/content";
+import "../../styles/projectsList.css";
 
 export const ProjectsList = () => {
   return (

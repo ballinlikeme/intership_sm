@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SubMenu } from "./SubMenu";
-import "../styles/menuElement.css";
+import "../../styles/menuElement.css";
 
 export const MenuElement = ({ title, children }) => {
   const [isActive, setIsActive] = useState(false);

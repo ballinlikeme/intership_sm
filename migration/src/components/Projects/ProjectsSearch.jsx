@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/projectsSearch.css";
+import "../../styles/projectsSearch.css";
 
 export const ProjectsSearch = () => {
   return (

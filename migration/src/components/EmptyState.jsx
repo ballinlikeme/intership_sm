@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/emptyState.css";
 
 export const EmptyState = () => {
   return (

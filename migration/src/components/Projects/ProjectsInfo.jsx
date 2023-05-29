@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/projectsInfo.css";
+import "../../styles/projectsInfo.css";
 
 export const ProjectsInfo = ({ text, title }) => {
   return (
