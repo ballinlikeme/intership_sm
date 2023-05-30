@@ -1,1 +1,1 @@
-Deploy: https://serene-cannoli-04a5a8.netlify.app/stage3.2/
+Deploy: https://ubiquitous-flan-0cd6fc.netlify.app
