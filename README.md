@@ -1,1 +1,1 @@
-Deploy: https://delightful-crostata-eb7766.netlify.app/stage2.1/
+Deploy: https://ubiquitous-flan-0cd6fc.netlify.app
