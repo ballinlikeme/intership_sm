@@ -32,7 +32,7 @@
   border-color: var(--accent-clr);
 }
 
-.form__item.invalid {
+.form__item input.invalid {
   border-color: red;
 }
 

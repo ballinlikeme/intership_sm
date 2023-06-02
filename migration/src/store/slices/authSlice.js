@@ -4,6 +4,8 @@ const initialState = {
   isAuth: false,
   userName: "",
   password: "",
+  isPasswordError: false,
+  isUserNameError: false,
 };
 
 export const authSlice = createSlice({
@@ -19,9 +21,25 @@ export const authSlice = createSlice({
     changePassword(state, action) {
       state.password = action.payload;
     },
+    setPasswordError(state, action) {
+      state.isPasswordError = action.payload;
+    },
+    setUserNameError(state, action) {
+      state.isUserNameError = action.payload;
+    },
+    clearErrors(state) {
+      state.isUserNameError = false;
+      state.isPasswordError = false;
+    },
   },
 });
 
-export const { authorizeUser, changePassword, changeUserName } =
-  authSlice.actions;
+export const {
+  authorizeUser,
+  changePassword,
+  changeUserName,
+  setPasswordError,
+  setUserNameError,
+  clearErrors,
+} = authSlice.actions;
 export const authReducer = authSlice.reducer;
