@@ -1,7 +1,8 @@
-import { ProjectsPage } from "./pages/ProjectsPage";
+import React from "react";
+import { Router } from "./components/Router";
 
 function App() {
-  return <ProjectsPage />;
+  return <Router />;
 }
 
 export default App;
