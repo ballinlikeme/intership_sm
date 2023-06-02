@@ -1,12 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { authorizeUser } from "../../store/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 import "../../styles/authFooter.css";
 
 export const AuthFooter = () => {
+  const [disabled, setDisabled] = useState(false);
+
+  const userName = useSelector((state) => state.auth.userName);
+  const password = useSelector((state) => state.auth.password);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userName || !password) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [userName, password]);
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    if (userName === "admin" && password === "123") {
+      dispatch(authorizeUser());
+      return navigate("/");
+    }
+  };
+
   return (
     <div className="form__footer">
       <div className="form__restore">Forgot your password?</div>
       <div className="form__button">
-        <button>Login</button>
+        <button disabled={disabled} onClick={(e) => handleClick(e)}>
+          Login
+        </button>
       </div>
     </div>
   );
