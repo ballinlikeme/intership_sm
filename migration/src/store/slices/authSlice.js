@@ -27,10 +27,6 @@ export const authSlice = createSlice({
     setUserNameError(state, action) {
       state.isUserNameError = action.payload;
     },
-    clearErrors(state) {
-      state.isUserNameError = false;
-      state.isPasswordError = false;
-    },
   },
 });
 
@@ -40,6 +36,5 @@ export const {
   changeUserName,
   setPasswordError,
   setUserNameError,
-  clearErrors,
 } = authSlice.actions;
 export const authReducer = authSlice.reducer;

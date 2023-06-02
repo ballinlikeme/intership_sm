@@ -6,7 +6,6 @@ import {
   changeUserName,
   setPasswordError,
   setUserNameError,
-  clearErrors,
 } from "../../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import "../../styles/authFooter.css";
