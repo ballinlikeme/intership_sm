@@ -1,5 +1,5 @@
 import React from "react";
-import { Logo } from "../../ui/Logo";
+import { Logo } from "./Logo/Logo";
 import { Menu } from "./Menu/Menu";
 import "../../styles/header/header.css";
 
