@@ -4,11 +4,11 @@ import { CONTENT_ITEMS } from "../data/content";
 import { EmptyState } from "./EmptyState";
 import "../styles/projectsList.css";
 
-export const ProjectsList = ({ filter }) => {
+export const ProjectsList = ({ keyWords }) => {
   const itemsToDisplay = CONTENT_ITEMS.filter(
     (elem) =>
-      elem.text.toLowerCase().includes(filter.toLowerCase()) ||
-      elem.title.toLowerCase().includes(filter.toLowerCase())
+      elem.text.toLowerCase().includes(keyWords.toLowerCase()) ||
+      elem.title.toLowerCase().includes(keyWords.toLowerCase())
   );
 
   if (!itemsToDisplay.length) {
