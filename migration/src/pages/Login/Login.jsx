@@ -1,10 +1,10 @@
 import React from "react";
-import { AuthForm, AuthLayout } from "features/authentication";
-
+import { LoginForm } from "./LoginForm/LoginForm";
+import { AuthLayout } from "../../components/AuthLayout/AuthLayout";
 export const Login = () => {
   return (
     <AuthLayout>
-      <AuthForm />
+      <LoginForm />
     </AuthLayout>
   );
 };

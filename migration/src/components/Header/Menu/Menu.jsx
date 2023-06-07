@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { MenuIcon } from "./MenuIcon";
-import { MenuList } from "./MenuList";
-import "../../../styles/header/menu/menu.css";
+import { MenuIcon } from "./MenuIcon/MenuIcon";
+import { MenuList } from "./MenuList/MenuList";
+import "./Menu.css";
 
 export const Menu = () => {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <nav class="header__menu menu">
+    <nav className="header__menu menu">
       <MenuIcon setIsActive={setIsActive} isActive={isActive} />
       <MenuList isActive={isActive} />
     </nav>
