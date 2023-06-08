@@ -1,21 +1,25 @@
 import React from "react";
 import { ProjectsElement } from "../ProjectsElement/ProjectsElement";
-import { ProjectsEmpty } from "../ProjectsEmpty/ProjectsEmpty";
+import { ProjectsState } from "../ProjectsState/ProjectsState";
 import { useGetProjectsQuery } from "../../../../lib/redux/api/projectsApi";
 import "./ProjectsList.css";
 
 export const ProjectsList = ({ keyWords }) => {
-  const { isLoading, data } = useGetProjectsQuery(keyWords);
+  const { isLoading, data, isError } = useGetProjectsQuery(keyWords);
 
-  if (!isLoading && !data.length) {
-    return <ProjectsEmpty />;
+  if (!isLoading && data && !data.length) {
+    return <ProjectsState type="empty" />;
   }
 
   if (isLoading) {
     return <div>Loading</div>;
   }
 
-  if (data.length) {
+  if (isError) {
+    return <ProjectsState type="error" />;
+  }
+
+  if (data && data.length) {
     return (
       <ul className="projects__list" id="content-list">
         {data.map((item) => (

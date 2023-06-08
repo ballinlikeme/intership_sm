@@ -1,13 +1,13 @@
-.empty {
+.state {
   width: 100%;
   display: block;
 }
 
-.empty.active {
+.state.active {
   display: block;
 }
 
-.empty__body {
+.state__body {
   width: 100%;
   padding: 30px;
 
@@ -18,15 +18,15 @@
   gap: 30px;
 }
 
-.empty__icon {
+.state__icon {
   width: 100px;
 }
 
-.empty__icon img {
+.state__icon img {
   max-width: 100%;
 }
 
-.empty__content {
+.state__content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,11 +34,11 @@
   gap: 15px;
 }
 
-.empty__content h2 {
+.state__content h2 {
   font-size: 1.5rem;
   color: rgb(86, 86, 86);
 }
 
-.empty__content p {
+.state__content p {
   color: rgb(86, 86, 86);
 }
