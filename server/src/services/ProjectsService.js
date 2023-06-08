@@ -4,6 +4,14 @@ class ProjectsService {
   async getProjects() {
     return CONTENT_ITEMS;
   }
+
+  async getProjectsByName(name) {
+    return CONTENT_ITEMS.filter(
+      (item) =>
+        item.title.toLowerCase().includes(name.toLowerCase()) ||
+        item.text.toLowerCase().includes(name.toLowerCase())
+    );
+  }
 }
 
 export const projectsService = new ProjectsService();
