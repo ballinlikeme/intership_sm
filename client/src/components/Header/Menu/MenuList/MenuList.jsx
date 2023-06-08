@@ -1,21 +1,29 @@
 import React from "react";
 import { MenuElement } from "./MenuElement/MenuElement";
-import { MENU_ITEMS } from "../../../../data/menu";
+import { useGetMenuItemsQuery } from "lib/redux/api/menuApi";
 import "./MenuList.css";
 
 export const MenuList = ({ isActive }) => {
-  return (
-    <ul
-      className={isActive ? "menu__list active" : "menu__list"}
-      id="menu-body"
-    >
-      {MENU_ITEMS.map((item) => (
-        <MenuElement
-          key={item.id}
-          title={item.title}
-          childrenItems={item.children || []}
-        />
-      ))}
-    </ul>
-  );
+  const { data, isLoading, isError } = useGetMenuItemsQuery();
+
+  if (isLoading || isError || !data.length) {
+    return <div></div>;
+  }
+
+  if (data && data.length) {
+    return (
+      <ul
+        className={isActive ? "menu__list active" : "menu__list"}
+        id="menu-body"
+      >
+        {data.map((item) => (
+          <MenuElement
+            key={item.id}
+            title={item.title}
+            childrenItems={item.children || []}
+          />
+        ))}
+      </ul>
+    );
+  }
 };
