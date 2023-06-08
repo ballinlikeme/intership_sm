@@ -2,6 +2,7 @@ import React from "react";
 import { ProjectsElement } from "../ProjectsElement/ProjectsElement";
 import { ProjectsState } from "../ProjectsState/ProjectsState";
 import { useGetProjectsQuery } from "../../../../lib/redux/api/projectsApi";
+import { Loader } from "components/Loader/Loader";
 import "./ProjectsList.css";
 
 export const ProjectsList = ({ keyWords }) => {
@@ -12,7 +13,7 @@ export const ProjectsList = ({ keyWords }) => {
   }
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
 
   if (isError) {
