@@ -1,64 +1,52 @@
 import React, { useState, useEffect } from "react";
-import { Input } from "../../../components/Input/Input";
-import { Button } from "../../../components/Button/Button";
+import { Input } from "components/Input/Input";
+import { Button } from "components/Button/Button";
 import { useDispatch } from "react-redux";
-import { authorizeUser } from "../../../lib/redux/slices/authSlice";
+import { authorizeUser } from "lib/redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "lib/redux/api/authApi";
+import { Loader } from "components/Loader/Loader";
 import "./LoginForm.css";
 
 export const LoginForm = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [isUserNameError, setIsUserNameError] = useState(false);
-  const [isPasswordError, setIsPasswordError] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isFormError, setIsFormError] = useState(false);
+  const [isErrorFromApi, setIsErrorFromApi] = useState(false);
+
+  const [login, { error, isLoading }] = useLoginMutation();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isPasswordError || isUserNameError) {
-      setIsDisabled(true);
-    } else {
-      setIsDisabled(false);
-    }
-  }, [isPasswordError, isUserNameError]);
+    setIsFormError(false);
+    setIsErrorFromApi(false);
+  }, [userName, password]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (isDisabled) {
+    if (isFormError) {
       return;
     }
     if (!userName || !password) {
-      return setIsDisabled(true);
+      return isFormError(true);
     }
-    if (userName !== "admin") {
-      return setIsUserNameError(true);
-    }
-    if (password !== "1234") {
-      return setIsPasswordError(true);
-    }
-    dispatch(authorizeUser());
-    navigate("/");
+    const user = { username: userName, password };
+    login(user).then((response) => {
+      if (response.data) {
+        dispatch(authorizeUser());
+        navigate("/");
+      } else {
+        setIsFormError(true);
+        setIsErrorFromApi(true);
+      }
+    });
   };
 
-  const handleUserNameChange = (value) => {
-    setUserName(value);
-    if (value) {
-      setIsUserNameError(false);
-    } else {
-      setIsUserNameError(true);
-    }
-  };
-
-  const handlePasswordChange = (value) => {
-    setPassword(value);
-    if (value) {
-      setIsPasswordError(false);
-    } else {
-      setIsPasswordError(true);
-    }
-  };
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <form className="form">
@@ -67,31 +55,36 @@ export const LoginForm = () => {
       </div>
       <div className="form__content">
         <div className="form__body">
-          <div className="form__item">
-            <label>Username</label>
-            <Input
-              className={isUserNameError ? "app__input invalid" : "app__input"}
-              type="text"
-              placeholder="Username"
-              value={userName}
-              onChange={(e) => handleUserNameChange(e.target.value)}
-            />
+          <div className="form__list">
+            <div className="form__item">
+              <label>Username</label>
+              <Input
+                className={isFormError ? "app__input invalid" : "app__input"}
+                type="text"
+                placeholder="Username"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </div>
+            <div className="form__item">
+              <label>Password</label>
+              <Input
+                className={isFormError ? "app__input invalid" : "app__input"}
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
           </div>
-          <div className="form__item">
-            <label>Password</label>
-            <Input
-              className={isPasswordError ? "app__input invalid" : "app__input"}
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => handlePasswordChange(e.target.value)}
-            />
-          </div>
+          {isErrorFromApi && (
+            <div className="form__error">{error.data.message}</div>
+          )}
         </div>
         <div className="form__footer">
           <div className="form__restore">Forgot your password?</div>
           <div className="form__button">
-            <Button disabled={isDisabled} onClick={(e) => handleSubmit(e)}>
+            <Button disabled={isFormError} onClick={(e) => handleSubmit(e)}>
               Login
             </Button>
           </div>
