@@ -1,25 +1,29 @@
 import React from "react";
 import { ProjectsElement } from "../ProjectsElement/ProjectsElement";
-import { CONTENT_ITEMS } from "../../../../data/content";
 import { ProjectsEmpty } from "../ProjectsEmpty/ProjectsEmpty";
+import { useGetProjectsQuery } from "../../../../lib/redux/api/projectsApi";
 import "./ProjectsList.css";
 
 export const ProjectsList = ({ keyWords }) => {
-  const itemsToDisplay = CONTENT_ITEMS.filter(
-    (elem) =>
-      elem.text.toLowerCase().includes(keyWords.toLowerCase()) ||
-      elem.title.toLowerCase().includes(keyWords.toLowerCase())
-  );
+  const { isLoading, data } = useGetProjectsQuery(keyWords);
 
-  if (!itemsToDisplay.length) {
+  if (!isLoading && !data.length) {
     return <ProjectsEmpty />;
   }
 
-  return (
-    <ul className="projects__list" id="content-list">
-      {itemsToDisplay.map((item) => (
-        <ProjectsElement key={item.id} item={item} />
-      ))}
-    </ul>
-  );
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
+
+  if (data.length) {
+    return (
+      <ul className="projects__list" id="content-list">
+        {data.map((item) => (
+          <ProjectsElement key={item.id} item={item} />
+        ))}
+      </ul>
+    );
+  }
+
+  return <div></div>;
 };
