@@ -1,4 +1,4 @@
-import { AuthError } from "../utils/authError.js";
+import { AuthError } from "../exceptions/AuthError.js";
 
 class AuthService {
   async login(username, password) {

@@ -1,5 +1,5 @@
 import Router from "express";
-import { projectsRouter } from "./projectsRouter.js";
+import { projectsRouter } from "./ProjectsRouter.js";
 import { menuRouter } from "./MenuRouter.js";
 import { authRouter } from "./AuthRouter.js";
 
