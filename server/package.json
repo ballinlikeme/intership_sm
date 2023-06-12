@@ -8,7 +8,8 @@
     "dev": "nodemon ./src/index.js",
     "debug": "nodemon --inspect=3002 ./src/index.js",
     "build": "node ./src/index.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "cd .. && husky install ./server/.husky"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +20,7 @@
   },
   "devDependencies": {
     "dotenv": "^16.1.4",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "nodemon": "^2.0.22",
     "pretty-quick": "^3.1.3"
   }
