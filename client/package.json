@@ -17,7 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "format": "npx prettier --write .",
     "check": "npx prettier --check ."
@@ -41,9 +41,15 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.22.5",
+    "@babel/preset-react": "^7.22.5",
+    "babel-jest": "^29.5.0",
     "eslint": "^8.42.0",
     "eslint-plugin-react": "^7.32.2",
+    "jest": "^27.5.1",
+    "jest-fetch-mock": "^3.0.3",
     "prettier": "2.8.8",
-    "react-error-overlay": "^6.0.9"
+    "react-error-overlay": "^6.0.9",
+    "react-test-renderer": "^18.2.0"
   }
 }
