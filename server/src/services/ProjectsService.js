@@ -1,6 +1,10 @@
 import { CONTENT_ITEMS } from "../data/content.js";
 
 class ProjectsService {
+  async getProjects() {
+    return CONTENT_ITEMS;
+  }
+
   async getProjectsByName(name) {
     return CONTENT_ITEMS.filter(
       (item) =>
