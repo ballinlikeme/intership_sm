@@ -30,7 +30,7 @@ export const LoginForm = () => {
       return;
     }
     if (!userName || !password) {
-      return isFormError(true);
+      return setIsFormError(true);
     }
     const user = { username: userName, password };
     login(user).then((response) => {
@@ -80,7 +80,9 @@ export const LoginForm = () => {
             </div>
           </div>
           {isErrorFromApi && (
-            <div className="form__error">{error.data.message}</div>
+            <div className="form__error">
+              {error.data?.message || "Internal Server Error. Try again later."}
+            </div>
           )}
         </div>
         <div className="form__footer">
