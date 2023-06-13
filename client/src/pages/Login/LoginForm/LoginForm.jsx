@@ -57,23 +57,25 @@ export const LoginForm = () => {
         <div className="form__body">
           <div className="form__list">
             <div className="form__item">
-              <label>Username</label>
+              <label htmlFor="username">Username</label>
               <Input
                 className={isFormError ? "app__input invalid" : "app__input"}
                 type="text"
                 placeholder="Username"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
+                id="username"
               />
             </div>
             <div className="form__item">
-              <label>Password</label>
+              <label htmlFor="pass">Password</label>
               <Input
                 className={isFormError ? "app__input invalid" : "app__input"}
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                id="pass"
               />
             </div>
           </div>
