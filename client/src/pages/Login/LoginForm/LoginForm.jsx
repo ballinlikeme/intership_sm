@@ -65,6 +65,7 @@ export const LoginForm = () => {
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
                 id="username"
+                aria-label="username"
               />
             </div>
             <div className="form__item">
@@ -76,6 +77,7 @@ export const LoginForm = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 id="pass"
+                aria-label="password"
               />
             </div>
           </div>
@@ -88,7 +90,11 @@ export const LoginForm = () => {
         <div className="form__footer">
           <div className="form__restore">Forgot your password?</div>
           <div className="form__button">
-            <Button disabled={isFormError} onClick={(e) => handleSubmit(e)}>
+            <Button
+              aria-label="submit-button"
+              disabled={isFormError}
+              onClick={(e) => handleSubmit(e)}
+            >
               Login
             </Button>
           </div>
