@@ -5,9 +5,7 @@ class ProjectsController {
     try {
       const projects = await projectsService.getProjects();
       return res.json(projects);
-    } catch (e) {
-      return res.status(500).json(e);
-    }
+    } catch (e) {}
   }
 
   async getProjectsByName(req, res) {

@@ -30,7 +30,7 @@ export const LoginForm = () => {
       return;
     }
     if (!userName || !password) {
-      return isFormError(true);
+      return setIsFormError(true);
     }
     const user = { username: userName, password };
     login(user).then((response) => {
@@ -57,34 +57,44 @@ export const LoginForm = () => {
         <div className="form__body">
           <div className="form__list">
             <div className="form__item">
-              <label>Username</label>
+              <label htmlFor="username">Username</label>
               <Input
                 className={isFormError ? "app__input invalid" : "app__input"}
                 type="text"
                 placeholder="Username"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
+                id="username"
+                aria-label="username"
               />
             </div>
             <div className="form__item">
-              <label>Password</label>
+              <label htmlFor="pass">Password</label>
               <Input
                 className={isFormError ? "app__input invalid" : "app__input"}
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                id="pass"
+                aria-label="password"
               />
             </div>
           </div>
           {isErrorFromApi && (
-            <div className="form__error">{error.data.message}</div>
+            <div className="form__error">
+              {error.data?.message || "Internal Server Error. Try again later."}
+            </div>
           )}
         </div>
         <div className="form__footer">
           <div className="form__restore">Forgot your password?</div>
           <div className="form__button">
-            <Button disabled={isFormError} onClick={(e) => handleSubmit(e)}>
+            <Button
+              aria-label="submit-button"
+              disabled={isFormError}
+              onClick={(e) => handleSubmit(e)}
+            >
               Login
             </Button>
           </div>
