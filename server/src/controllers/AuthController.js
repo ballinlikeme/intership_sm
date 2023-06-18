@@ -37,7 +37,7 @@ class AuthController {
   async refresh(req, res, next) {
     try {
       const { refreshToken } = req.cookies;
-      const tokens = authService.refresh(refreshToken);
+      const tokens = await authService.refresh(refreshToken);
       res.cookie("refreshToken", tokens.refreshToken);
       return res.json(tokens);
     } catch (error) {

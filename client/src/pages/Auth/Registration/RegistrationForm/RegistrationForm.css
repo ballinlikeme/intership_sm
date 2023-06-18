@@ -1,0 +1,9 @@
+.reg__button {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+.reg__footer {
+  flex-direction: column;
+  gap: 13px;
+}

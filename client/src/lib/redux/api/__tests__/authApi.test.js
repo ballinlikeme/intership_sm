@@ -2,7 +2,7 @@ import React from "react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
-import { Login } from "pages/Login/Login";
+import { Login } from "pages/Auth/Login/Login";
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";

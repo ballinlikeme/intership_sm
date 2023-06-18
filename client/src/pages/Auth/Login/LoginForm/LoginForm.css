@@ -80,6 +80,15 @@
   flex: 0 1 40%;
 }
 
+.form__redirect {
+  font-size: 0.9rem;
+}
+
+.form__redirect span {
+  cursor: pointer;
+  color: var(--accent-clr);
+}
+
 @media (max-width: 520px) {
   .form {
     width: 300px;
