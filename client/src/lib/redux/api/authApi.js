@@ -15,6 +15,22 @@ export const authApi = createApi({
         method: "POST",
         body: user,
       }),
+      transformErrorResponse: (response) => {
+        console.log(response.data);
+        if (response.data.details) {
+          return response.data.details[0];
+        }
+        return response.data;
+      },
+      async onQueryStarted(args, { queryFulfilled, dispatch }) {
+        try {
+          const { data } = await queryFulfilled;
+          localStorage.setItem("accessToken", data.accessToken);
+          dispatch(authorizeUser());
+        } catch (error) {
+          console.log(error);
+        }
+      },
     }),
     register: builder.mutation({
       query: (requestBody) => ({
@@ -28,6 +44,15 @@ export const authApi = createApi({
           return response.data.details[0];
         }
         return response.data;
+      },
+      async onQueryStarted(args, { queryFulfilled, dispatch }) {
+        try {
+          const { data } = await queryFulfilled;
+          localStorage.setItem("accessToken", data.accessToken);
+          dispatch(authorizeUser());
+        } catch (error) {
+          console.log(error);
+        }
       },
     }),
     checkAuth: builder.query({

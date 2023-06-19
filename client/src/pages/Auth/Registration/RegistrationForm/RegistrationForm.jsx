@@ -23,16 +23,28 @@ export const RegistrationForm = () => {
   const [isConfirmPasswordError, setIsConfirmPasswordError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const [isRequestError, setIsRequestError] = useState(false);
+
   const [register] = useRegisterMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setIsUsernameError(false);
-    setIsPasswordError(false);
-    setIsConfirmPasswordError(false);
-    setIsFirstNameError(false);
-    setIsLastNameError(false);
+    if (
+      isUsernameError ||
+      isPasswordError ||
+      isFirstNameError ||
+      isLastNameError ||
+      isConfirmPasswordError ||
+      isRequestError
+    ) {
+      setIsUsernameError(false);
+      setIsPasswordError(false);
+      setIsConfirmPasswordError(false);
+      setIsFirstNameError(false);
+      setIsLastNameError(false);
+      setIsRequestError(false);
+    }
   }, [username, password, firstName, lastName, confirmPassword]);
 
   const handleSubmit = (event) => {
@@ -47,33 +59,40 @@ export const RegistrationForm = () => {
     };
 
     register(requestBody).then((result) => {
-      if (result.data?.accessToken) {
-        dispatch(authorizeUser());
-        navigate(ROUTE_NAMES.PROJECTS);
-      } else {
-        setErrorMessage(result.error.message);
-        if ("path" in result.error) {
-          const erroredField = result.error.path[0];
-          switch (erroredField) {
-            case "username":
-              setIsUsernameError(true);
-              break;
-            case "password":
-              setIsPasswordError(true);
-              break;
-            case "name":
-              setIsFirstNameError(true);
-              break;
-            case "surname":
-              setIsLastNameError(true);
-              break;
-            case "passwordConfirmation":
-              setIsConfirmPasswordError(true);
-              break;
-            default:
-              return null;
+      try {
+        if (result.data?.accessToken) {
+          dispatch(authorizeUser());
+          navigate(ROUTE_NAMES.PROJECTS);
+        } else {
+          setErrorMessage(result.error.message);
+          if ("path" in result.error) {
+            const erroredField = result.error.path[0];
+            switch (erroredField) {
+              case "username":
+                setIsUsernameError(true);
+                break;
+              case "password":
+                setIsPasswordError(true);
+                break;
+              case "name":
+                setIsFirstNameError(true);
+                break;
+              case "surname":
+                setIsLastNameError(true);
+                break;
+              case "passwordConfirmation":
+                setIsConfirmPasswordError(true);
+                break;
+              default:
+                return null;
+            }
+          } else {
+            setIsUsernameError(true);
           }
         }
+      } catch (error) {
+        setIsRequestError(true);
+        console.log(error);
       }
     });
   };
@@ -101,7 +120,9 @@ export const RegistrationForm = () => {
                 id="username"
                 aria-label="username"
               />
-              {isUsernameError && <div>{errorMessage}</div>}
+              {isUsernameError && (
+                <div className="form__error">{errorMessage}</div>
+              )}
             </div>
             <div className="form__item">
               <label className="reg__label" htmlFor="pass">
@@ -118,7 +139,9 @@ export const RegistrationForm = () => {
                 id="pass"
                 aria-label="password"
               />
-              {isPasswordError && <div>{errorMessage}</div>}
+              {isPasswordError && (
+                <div className="form__error">{errorMessage}</div>
+              )}
             </div>
             <div className="form__item">
               <label className="reg__label" htmlFor="pass-confirm">
@@ -135,7 +158,9 @@ export const RegistrationForm = () => {
                 id="pass-confirm"
                 aria-label="password-confirm"
               />
-              {isConfirmPasswordError && <div>{errorMessage}</div>}
+              {isConfirmPasswordError && (
+                <div className="form__error">{errorMessage}</div>
+              )}
             </div>
             <div className="form__item">
               <label className="reg__label" htmlFor="first-name">
@@ -152,7 +177,9 @@ export const RegistrationForm = () => {
                 id="first-name"
                 aria-label="first-name"
               />
-              {isFirstNameError && <div>{errorMessage}</div>}
+              {isFirstNameError && (
+                <div className="form__error">{errorMessage}</div>
+              )}
             </div>
             <div className="form__item">
               <label className="reg__label" htmlFor="last-name">
@@ -169,10 +196,15 @@ export const RegistrationForm = () => {
                 id="last-name"
                 aria-label="last-name"
               />
-              {isLastNameError && <div>{errorMessage}</div>}
+              {isLastNameError && (
+                <div className="form__error">{errorMessage}</div>
+              )}
             </div>
           </div>
         </div>
+        {isRequestError && (
+          <div className="form__error">Unexpected error. Try again later.</div>
+        )}
         <div className="form__footer reg__footer">
           <div className="form__button reg__button">
             <Button onClick={handleSubmit} aria-label="submit-button">

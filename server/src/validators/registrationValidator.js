@@ -19,7 +19,12 @@ const registrationSchema = Joi.object({
     .min(3)
     .message("Last Name should be at least 3 characters long")
     .required(),
-  passwordConfirmation: Joi.string().valid(Joi.ref("password")).required(),
+  passwordConfirmation: Joi.string()
+    .valid(Joi.ref("password"))
+    .required()
+    .messages({
+      "any.only": "Password must match",
+    }),
 });
 
 export const registrationValidator = (req, res, next) => {

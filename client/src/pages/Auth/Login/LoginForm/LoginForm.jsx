@@ -1,47 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "components/Input/Input";
 import { Button } from "components/Button/Button";
-import { useDispatch } from "react-redux";
-import { authorizeUser } from "lib/redux/slices/authSlice";
-import { useNavigate } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+// import { authorizeUser } from "lib/redux/slices/authSlice";
+// import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "lib/redux/api/authApi";
 import { Loader } from "components/Loader/Loader";
+import { ROUTE_NAMES } from "lib/router/utils/routerNames";
+import { Link } from "react-router-dom";
 import "./LoginForm.css";
 
 export const LoginForm = () => {
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isFormError, setIsFormError] = useState(false);
-  const [isErrorFromApi, setIsErrorFromApi] = useState(false);
+  const [isUsernameError, setIsUsernameError] = useState(false);
+  const [isPasswordError, setIsPasswordError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const [login, { error, isLoading }] = useLoginMutation();
+  const [isRequestError, setIsRequestError] = useState(false);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
 
   useEffect(() => {
-    setIsFormError(false);
-    setIsErrorFromApi(false);
-  }, [userName, password]);
+    if (isUsernameError || isPasswordError || isRequestError) {
+      setIsUsernameError(false);
+      setIsPasswordError(false);
+      setIsRequestError(false);
+    }
+  }, [username, password]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (isFormError) {
-      return;
+    try {
+      login({ username, password }).then((result) => {
+        if (result.error) {
+          setErrorMessage(result.error.message);
+          const erroredField = result.error.message.split(" ")[1];
+          switch (erroredField) {
+            case "username":
+              setIsUsernameError(true);
+              break;
+            case "password":
+              setIsPasswordError(true);
+              break;
+          }
+        }
+      });
+    } catch (error) {
+      setIsRequestError(true);
     }
-    if (!userName || !password) {
-      return setIsFormError(true);
-    }
-    const user = { username: userName, password };
-    login(user).then((response) => {
-      if (response.data) {
-        dispatch(authorizeUser());
-        navigate("/");
-      } else {
-        setIsFormError(true);
-        setIsErrorFromApi(true);
-      }
-    });
   };
 
   if (isLoading) {
@@ -59,19 +66,26 @@ export const LoginForm = () => {
             <div className="form__item">
               <label htmlFor="username">Username</label>
               <Input
-                className={isFormError ? "app__input invalid" : "app__input"}
+                className={
+                  isUsernameError ? "app__input invalid" : "app__input"
+                }
                 type="text"
                 placeholder="Username"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 id="username"
                 aria-label="username"
               />
+              {isUsernameError && (
+                <div className="form__error">{errorMessage}</div>
+              )}
             </div>
             <div className="form__item">
               <label htmlFor="pass">Password</label>
               <Input
-                className={isFormError ? "app__input invalid" : "app__input"}
+                className={
+                  isPasswordError ? "app__input invalid" : "app__input"
+                }
                 type="password"
                 placeholder="Password"
                 value={password}
@@ -79,20 +93,26 @@ export const LoginForm = () => {
                 id="pass"
                 aria-label="password"
               />
+              {isPasswordError && (
+                <div className="form__error">{errorMessage}</div>
+              )}
             </div>
           </div>
-          {isErrorFromApi && (
-            <div className="form__error">
-              {error.data?.message || "Internal Server Error. Try again later."}
-            </div>
-          )}
         </div>
+        {isRequestError && (
+          <div className="form__error">Unexpected error. Try again later.</div>
+        )}
         <div className="form__footer">
-          <div className="form__restore">Forgot your password?</div>
+          <div className="form__redirect">
+            Not a member?{" "}
+            <Link to={ROUTE_NAMES.REGISTRATION}>
+              <span>Sign up</span>.
+            </Link>
+          </div>
           <div className="form__button">
             <Button
               aria-label="submit-button"
-              disabled={isFormError}
+              disabled={isUsernameError || isPasswordError}
               onClick={(e) => handleSubmit(e)}
             >
               Login
