@@ -75,6 +75,7 @@ export const LoginForm = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 id="username"
                 aria-label="username"
+                data-testid="username"
               />
               {isUsernameError && (
                 <div className="form__error">{errorMessage}</div>

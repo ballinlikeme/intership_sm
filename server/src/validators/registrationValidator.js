@@ -8,7 +8,7 @@ const registrationSchema = Joi.object({
   password: Joi.string()
     .min(4)
     .message("Password should be at least 4 characters long")
-    .pattern(new RegExp("^(?:[0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*$"))
+    .pattern(new RegExp("^(?:[0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*$", "i"))
     .message("Password should contain at least 1 number and 1 letter")
     .required(),
   name: Joi.string()
