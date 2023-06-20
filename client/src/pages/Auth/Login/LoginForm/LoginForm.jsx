@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "components/Input/Input";
 import { Button } from "components/Button/Button";
-// import { useDispatch } from "react-redux";
-// import { authorizeUser } from "lib/redux/slices/authSlice";
-// import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "lib/redux/api/authApi";
 import { Loader } from "components/Loader/Loader";
 import { ROUTE_NAMES } from "lib/router/utils/routerNames";

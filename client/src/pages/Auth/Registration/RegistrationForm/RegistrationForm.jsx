@@ -15,6 +15,7 @@ export const RegistrationForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [age, setAge] = useState(1);
 
   const [isUsernameError, setIsUsernameError] = useState(false);
   const [isPasswordError, setIsPasswordError] = useState(false);
@@ -56,6 +57,7 @@ export const RegistrationForm = () => {
       name: firstName,
       surname: lastName,
       passwordConfirmation: confirmPassword,
+      age,
     };
 
     register(requestBody).then((result) => {
@@ -195,6 +197,26 @@ export const RegistrationForm = () => {
                 placeholder="Last Name"
                 id="last-name"
                 aria-label="last-name"
+              />
+              {isLastNameError && (
+                <div className="form__error">{errorMessage}</div>
+              )}
+            </div>
+            <div className="form__item">
+              <label className="reg__label" htmlFor="last-name">
+                Age
+              </label>
+              <Input
+                className={
+                  isLastNameError ? "app__input invalid" : "app__input"
+                }
+                type="number"
+                min="1"
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
+                placeholder="Age"
+                id="age"
+                aria-label="age"
               />
               {isLastNameError && (
                 <div className="form__error">{errorMessage}</div>
