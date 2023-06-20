@@ -45,6 +45,9 @@ beforeEach(() => {
   usernameInput = screen.getByTestId("username");
   passwordInput = screen.getByLabelText("password");
   submitButton = screen.getByLabelText("submit-button");
+
+  fireEvent.change(usernameInput, { target: { value: "admin" } });
+  fireEvent.change(passwordInput, { target: { value: "1234" } });
 });
 
 afterEach(() => {
@@ -66,7 +69,6 @@ describe("login api", () => {
   });
 
   it("handles login request with invalid password", async () => {
-    fireEvent.change(usernameInput, { target: { value: "admin" } });
     fireEvent.change(passwordInput, { target: { value: "dummyPassword" } });
 
     fireEvent.click(submitButton);
@@ -77,9 +79,6 @@ describe("login api", () => {
   });
 
   it("handles valid login request", async () => {
-    fireEvent.change(usernameInput, { target: { value: "admin" } });
-    fireEvent.change(passwordInput, { target: { value: "1234" } });
-
     expect(store.getState().auth.isAuth).toBe(false);
 
     fireEvent.click(submitButton);
