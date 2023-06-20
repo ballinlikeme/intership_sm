@@ -22,7 +22,7 @@ class AuthService {
     return tokens;
   }
 
-  async register(username, password, name, surname) {
+  async register(username, password, name, surname, age) {
     const candidate = await userService.getUserByUsername(username);
     if (candidate.length) {
       throw ApiError.BadRequest("This username is already taken");
@@ -32,7 +32,8 @@ class AuthService {
       username,
       hashedPassword,
       name,
-      surname
+      surname,
+      age
     );
     const payload = new UserDto(user);
     const tokens = tokenService.generateTokens(payload);

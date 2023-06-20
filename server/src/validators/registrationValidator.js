@@ -25,6 +25,7 @@ const registrationSchema = Joi.object({
     .messages({
       "any.only": "Password must match",
     }),
+  age: Joi.number().min(1).message("Age must be bigger then zero").required(),
 });
 
 export const registrationValidator = (req, res, next) => {

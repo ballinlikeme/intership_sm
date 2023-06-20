@@ -9,5 +9,6 @@ export class UserDto {
     this.name = model.name;
     this.surname = model.surname;
     this.id = model.id;
+    this.age = model.age;
   }
 }

@@ -17,12 +17,13 @@ class AuthController {
 
   async register(req, res, next) {
     try {
-      const { username, password, name, surname } = req.body;
+      const { username, password, name, surname, age } = req.body;
       const tokens = await authService.register(
         username,
         password,
         name,
-        surname
+        surname,
+        age
       );
       res.cookie("refreshToken", tokens.refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000,
